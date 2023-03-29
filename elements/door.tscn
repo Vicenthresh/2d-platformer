@@ -1,0 +1,89 @@
+[gd_scene load_steps=13 format=3 uid="uid://dlcuyymkpxbyl"]
+
+[ext_resource type="Script" path="res://elements/door.gd" id="1_4vd8a"]
+[ext_resource type="Texture2D" uid="uid://c2el2t3a48x03" path="res://assets/player2-Sheet.png" id="1_w0jcf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e2nko"]
+atlas = ExtResource("1_w0jcf")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_evfyp"]
+atlas = ExtResource("1_w0jcf")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b87md"]
+atlas = ExtResource("1_w0jcf")
+region = Rect2(32, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rq1i"]
+atlas = ExtResource("1_w0jcf")
+region = Rect2(48, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xf5u"]
+atlas = ExtResource("1_w0jcf")
+region = Rect2(64, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f0pqn"]
+atlas = ExtResource("1_w0jcf")
+region = Rect2(80, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bo0y4"]
+atlas = ExtResource("1_w0jcf")
+region = Rect2(96, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ieek"]
+atlas = ExtResource("1_w0jcf")
+region = Rect2(112, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_et13x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e2nko")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_evfyp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b87md")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rq1i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xf5u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f0pqn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bo0y4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ieek")
+}, {
+"duration": 3.0,
+"texture": null
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yltmm"]
+radius = 8.0
+height = 16.0
+
+[node name="Door" type="Area2D"]
+script = ExtResource("1_4vd8a")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_et13x")
+frame_progress = 0.785775
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_yltmm")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
