@@ -92,6 +92,7 @@ anchors_preset = 0
 offset_right = 59.0
 offset_bottom = 24.0
 script = ExtResource("1_5xtq0")
+metadata/_edit_vertical_guides_ = []
 
 [node name="hpBorder" type="TextureRect" parent="."]
 visible = false
@@ -111,6 +112,7 @@ texture = ExtResource("3_3xg6l")
 stretch_mode = 1
 
 [node name="heart_1" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 position = Vector2(12, 12)
 sprite_frames = SubResource("SpriteFrames_tyhy8")
 animation = &"full"
