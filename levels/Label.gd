@@ -1,14 +1,11 @@
-extends Node2D
+extends Label
 
-@onready var player = $CharacterBody2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print("hola 3")
-	player.position = Global.player_position
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	set_text("FPS " + str(Engine.get_frames_per_second()))

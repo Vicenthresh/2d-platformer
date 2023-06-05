@@ -11,10 +11,12 @@ var knockback: = Vector2.ZERO
 var knockbackTween
 
 var state: = 'normal'
-var max_hp: = 5
+var max_hp: = 3
 var current_hp = max_hp
 var max_jumps = 1
 var jumps_left = max_jumps
+
+signal hp_changed(current_hp)
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -24,6 +26,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var collision = $CollisionShape2D
 
 func _ready():
+	#Engine.time_scale = 0.5
 	animSprite.is_playing()
 	
 func _process(delta):
@@ -45,7 +48,11 @@ func _physics_process(delta):
 		max_speed = max_running_speed
 
 	# Handle Jump.
-	if Input.is_action_just_pressed("ui_up") and jumps_left > 0 and is_on_floor():
+	if (Input.is_action_just_pressed("jump")) and jumps_left > 0 and is_on_floor():
+#		if abs(velocity.x) == max_running_speed:
+#			velocity.y = JUMP_VELOCITY - (abs(velocity.x) * 0.2)
+#			max_air_speed = 200
+#		else:
 		velocity.y = JUMP_VELOCITY
 		jumps_left -= 1
 
@@ -65,15 +72,17 @@ func _physics_process(delta):
 	
 	if state == 'normal':
 		get_animation(velocity)
-	label.text = 'vida: ' + str(current_hp)
-	
+#	label.text = 'vida: ' + str(current_hp)
+	label.text = str(velocity)
 	
 	for idx in range(get_slide_collision_count()):
 		var collision = get_slide_collision(idx)
 		if collision.get_collider().name == 'Danger' and state != 'hurt':
 			take_damage(1, Vector2(400 ,-250))
 		
-func get_animation(velocity):		
+func get_animation(velocity):
+	if velocity.y > 0:
+		animSprite.play('fall')
 	if velocity.x > 0:
 #		collision.position = Vector2(-0.5, -0.25)
 		if velocity.y < 0:
@@ -98,7 +107,9 @@ func get_animation(velocity):
 		animSprite.play('idle')
 		
 func take_damage(damage, knockback_vector:Vector2 = Vector2.ZERO, timer: float = 0.6):
+	
 	current_hp -= damage
+	hp_changed.emit(current_hp)
 	if(knockback_vector != Vector2.ZERO):
 		knockback = knockback_vector
 		state = 'hurt'
