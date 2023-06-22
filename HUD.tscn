@@ -1,3 +1,11 @@
-[gd_scene format=3 uid="uid://jrek8xsre5bl"]
+[gd_scene load_steps=2 format=3 uid="uid://jrek8xsre5bl"]
+
+[ext_resource type="PackedScene" uid="uid://imd34hqm1vls" path="res://hp_ui.tscn" id="1_08m8a"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="HP_UI" parent="." instance=ExtResource("1_08m8a")]
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 74.0
+offset_bottom = 39.0

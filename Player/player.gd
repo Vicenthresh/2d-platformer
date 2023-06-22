@@ -107,7 +107,6 @@ func get_animation(velocity):
 		animSprite.play('idle')
 		
 func take_damage(damage, knockback_vector:Vector2 = Vector2.ZERO, timer: float = 0.6):
-	
 	current_hp -= damage
 	hp_changed.emit(current_hp)
 	if(knockback_vector != Vector2.ZERO):
