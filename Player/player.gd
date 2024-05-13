@@ -24,6 +24,9 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var animSprite = $AnimatedSprite2D
 @onready var label = $Label
 @onready var collision = $CollisionShape2D
+# Sounds
+@onready var jump_sound = $JumpSound
+@onready var damage_sound = $DamageSound
 
 func _ready():
 	#Engine.time_scale = 0.5
@@ -35,7 +38,7 @@ func _process(delta):
 		
 func _physics_process(delta):
 	var max_speed
-	# Add the gravity.
+	# Add the gravity
 	if not is_on_floor():
 		if velocity.y > 0:
 			velocity.y += gravity*1.5 * delta
@@ -48,11 +51,12 @@ func _physics_process(delta):
 		max_speed = max_running_speed
 
 	# Handle Jump.
-	if (Input.is_action_just_pressed("jump")) and jumps_left > 0 and is_on_floor():
+	if (Input.is_action_just_pressed("jump")) and jumps_left > 0:
 #		if abs(velocity.x) == max_running_speed:
 #			velocity.y = JUMP_VELOCITY - (abs(velocity.x) * 0.2)
 #			max_air_speed = 200
 #		else:
+		jump_sound.play()
 		velocity.y = JUMP_VELOCITY
 		jumps_left -= 1
 
@@ -72,7 +76,6 @@ func _physics_process(delta):
 	
 	if state == 'normal':
 		get_animation(velocity)
-#	label.text = 'vida: ' + str(current_hp)
 	label.text = str(velocity)
 	
 	for idx in range(get_slide_collision_count()):
@@ -107,6 +110,7 @@ func get_animation(velocity):
 		animSprite.play('idle')
 		
 func take_damage(damage, knockback_vector:Vector2 = Vector2.ZERO, timer: float = 0.6):
+	damage_sound.play()
 	current_hp -= damage
 	hp_changed.emit(current_hp)
 	if(knockback_vector != Vector2.ZERO):
