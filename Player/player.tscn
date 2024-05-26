@@ -121,7 +121,7 @@ animation = &"jump"
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_jrfsn")
-pitch_scale = 0.3
+pitch_scale = 0.28
 bus = &"SFX"
 
 [node name="DamageSound" type="AudioStreamPlayer2D" parent="."]

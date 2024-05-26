@@ -1,110 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://cprdoga4uk04u"]
+[gd_scene load_steps=11 format=3 uid="uid://cprdoga4uk04u"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_8wsbn"]
 [ext_resource type="Texture2D" uid="uid://khhk3qsca6q5" path="res://assets/tileset.png" id="2_0kpn7"]
 [ext_resource type="PackedScene" uid="uid://b28qtdgpgwah2" path="res://Player/player.tscn" id="2_nrrpm"]
-[ext_resource type="Texture2D" uid="uid://cnwwtritfvy2e" path="res://assets/assets-Sheet.png" id="6_wnclj"]
+[ext_resource type="TileSet" uid="uid://da5uhr3uoraav" path="res://levels/platforms.tres" id="4_luvga"]
+[ext_resource type="TileSet" uid="uid://b58n0us0l7bae" path="res://levels/spikes.tres" id="5_j1rkc"]
 [ext_resource type="Script" path="res://levels/Label.gd" id="7_aages"]
 [ext_resource type="PackedScene" uid="uid://jrek8xsre5bl" path="res://HUD.tscn" id="7_pe7kf"]
 [ext_resource type="PackedScene" uid="uid://imd34hqm1vls" path="res://hp_ui.tscn" id="8_k2a4y"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bnv5j"]
-texture = ExtResource("2_0kpn7")
-1:1/0 = 0
-1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:1/0/physics_layer_0/angular_velocity = 0.0
-1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-2:1/0 = 0
-2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:1/0/physics_layer_0/angular_velocity = 0.0
-2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-3:1/0 = 0
-3:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-3:1/0/physics_layer_0/angular_velocity = 0.0
-3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-5:1/0 = 0
-5:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-5:1/0/physics_layer_0/angular_velocity = 0.0
-5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-6:1/0 = 0
-6:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-6:1/0/physics_layer_0/angular_velocity = 0.0
-6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-7:1/0 = 0
-7:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-7:1/0/physics_layer_0/angular_velocity = 0.0
-7:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-1:2/0 = 0
-1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:2/0/physics_layer_0/angular_velocity = 0.0
-1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-2:2/0 = 0
-2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:2/0/physics_layer_0/angular_velocity = 0.0
-2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-3:2/0 = 0
-3:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-3:2/0/physics_layer_0/angular_velocity = 0.0
-3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-1:3/0 = 0
-1:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:3/0/physics_layer_0/angular_velocity = 0.0
-1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-2:3/0 = 0
-2:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:3/0/physics_layer_0/angular_velocity = 0.0
-2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-3:3/0 = 0
-3:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-3:3/0/physics_layer_0/angular_velocity = 0.0
-3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-0:4/0 = 0
-0:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:4/0/physics_layer_0/angular_velocity = 0.0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nu7vk"]
-texture = ExtResource("6_wnclj")
-0:0/0 = 0
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -8, 0, -8, 8, 8, -8, 8)
-0:0/0/custom_data_0 = 1
-1:0/0 = 0
-1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:0/0/physics_layer_0/angular_velocity = 0.0
-2:0/0 = 0
-2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:0/0/physics_layer_0/angular_velocity = 0.0
-3:0/0 = 0
-3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-3:0/0/physics_layer_0/angular_velocity = 0.0
-
-[sub_resource type="TileSet" id="TileSet_m2ai7"]
-physics_layer_0/collision_layer = 1
-custom_data_layer_0/name = "Terrain"
-custom_data_layer_0/type = 2
-sources/0 = SubResource("TileSetAtlasSource_bnv5j")
-sources/1 = SubResource("TileSetAtlasSource_nu7vk")
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k5cus"]
-texture = ExtResource("6_wnclj")
-0:0/0 = 0
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -8, 0, -8, 8, 8, -8, 8)
-1:0/0 = 0
-1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:0/0/physics_layer_0/angular_velocity = 0.0
-2:0/0 = 0
-2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:0/0/physics_layer_0/angular_velocity = 0.0
-3:0/0 = 0
-3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-3:0/0/physics_layer_0/angular_velocity = 0.0
-
-[sub_resource type="TileSet" id="TileSet_5jckw"]
-physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_k5cus")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p3bgb"]
 texture = ExtResource("2_0kpn7")
@@ -158,15 +61,15 @@ position_smoothing_speed = 2.0
 editor_draw_limits = true
 editor_draw_drag_margin = true
 
-[node name="TileMap_collision" type="TileMap" parent="."]
+[node name="TileMap_collision2" type="TileMap" parent="."]
 position = Vector2(0, 360)
-tile_set = SubResource("TileSet_m2ai7")
+tile_set = ExtResource("4_luvga")
 format = 2
 layer_0/tile_data = PackedInt32Array(-196607, 393216, 1, -196606, 393216, 1, -196605, 393216, 1, -196604, 393216, 1, -196603, 393216, 1, -196602, 393216, 1, -196601, 393216, 1, -196600, 393216, 1, -196599, 393216, 1, -196598, 393216, 1, -196597, 393216, 1, -196596, 393216, 1, -196595, 393216, 1, -196594, 393216, 1, -196593, 393216, 1, -196592, 393216, 1, -196591, 393216, 1, -196590, 393216, 1, -196589, 393216, 1, -196588, 393216, 1, -196587, 393216, 1, -196586, 393216, 1, -196585, 393216, 1, -196584, 393216, 1, -196583, 393216, 1, -196582, 393216, 1, -196581, 393216, 1, -196580, 393216, 1, -196579, 393216, 1, -196578, 393216, 1, -196577, 393216, 1, -196576, 393216, 1, -196575, 393216, 1, -196574, 393216, 1, -196573, 393216, 1, -196572, 393216, 1, -196571, 393216, 1, -196570, 393216, 1, -196569, 393216, 1, -196568, 393216, 1, -196567, 393216, 1, -196566, 393216, 1, -196565, 393216, 1, -196564, 393216, 1, -196563, 393216, 1, -196562, 393216, 1, -196561, 393216, 1, -196560, 393216, 1, -196559, 393216, 1, -196558, 393216, 1, -196557, 393216, 1, -196556, 393216, 1, -196555, 393216, 1, -196554, 393216, 1, -196553, 393216, 1, -196552, 393216, 1, -196551, 393216, 1, -196550, 393216, 1, -196549, 393216, 1, -196548, 393216, 1, -196547, 393216, 1, -196546, 393216, 1, -196545, 393216, 1, -196544, 393216, 1, -196543, 393216, 1, -196542, 393216, 1, -196541, 393216, 1, -196540, 393216, 1, -196539, 393216, 1, -196538, 393216, 1, -196537, 393216, 1, -196536, 393216, 1, -196535, 393216, 1, -196534, 393216, 1, -196533, 393216, 1, -196532, 393216, 1, -196531, 393216, 1, -196530, 393216, 1, -196529, 393216, 1, -196528, 393216, 1, -196527, 393216, 1, -196526, 393216, 1, -196525, 393216, 1, -196524, 393216, 1, -196523, 393216, 1, -196522, 393216, 1, -196521, 393216, 1, -196520, 393216, 1, -196519, 393216, 1, -196518, 393216, 1, -196517, 393216, 1, -196516, 458752, 1, -196608, 327680, 1, -327671, 65536, 1, -327670, 131072, 1, -327669, 196608, 1, -262135, 65536, 3, -262134, 131072, 3, -262133, 196608, 3, -262129, 65536, 3, -262128, 131072, 3, -262127, 196608, 3, -262123, 65536, 3, -262122, 131072, 3, -262121, 196608, 3, -327659, 65536, 1, -327658, 131072, 1, -327657, 196608, 1, -327665, 65536, 1, -327664, 131072, 1, -327663, 196608, 1, -262090, 65536, 3, -262089, 131072, 3, -262088, 196608, 3, -327626, 65536, 2, -327625, 131072, 2, -327624, 196608, 2, -393162, 65536, 2, -393161, 131072, 2, -393160, 196608, 2, -458698, 65536, 1, -458696, 196608, 1, -458719, 327680, 1, -458718, 458752, 1, -458711, 458752, 1, -589778, 327680, 1, -589777, 393216, 1, -589776, 393216, 1, -589775, 393216, 1, -589774, 393216, 1, -589773, 393216, 1, -589772, 393216, 1, -589771, 458752, 1, -458697, 131072, 1, -589765, 327680, 1, -589764, 393216, 1, -589763, 458752, 1, -655295, 327680, 1, -655294, 393216, 1, -655293, 458752, 1, -786361, 327680, 1, -786360, 393216, 1, -786359, 458752, 1, -917427, 327680, 1, -917426, 393216, 1, -917425, 458752, 1, -458712, 393216, 1, -458714, 327680, 1, -458713, 393216, 1, -262087, 65536, 3, -262086, 131072, 3, -262085, 196608, 3, -262084, 65536, 3, -262083, 131072, 3, -262082, 196608, 3, -262081, 65536, 3, -262080, 131072, 3, -262079, 196608, 3, -262078, 65536, 3, -262077, 131072, 3, -262076, 196608, 3, -262075, 65536, 3, -262074, 131072, 3, -262073, 196608, 3, -262072, 65536, 3, -262071, 131072, 3, -262070, 196608, 3, -262069, 65536, 3, -262068, 131072, 3, -262067, 196608, 3, -262066, 65536, 3, -262065, 131072, 3, -262064, 196608, 3, -262063, 65536, 3, -262062, 131072, 3, -262061, 196608, 3, -262060, 65536, 3, -262059, 131072, 3, -262058, 196608, 3, -262057, 65536, 3, -262056, 131072, 3, -262055, 196608, 3, -262054, 65536, 3, -262053, 131072, 3, -262052, 196608, 3, -327623, 65536, 1, -327622, 131072, 1, -327621, 196608, 1, -327620, 65536, 1, -327619, 131072, 1, -327618, 196608, 1, -327617, 65536, 1, -327616, 131072, 1, -327615, 196608, 1, -327614, 65536, 1, -327613, 131072, 1, -327612, 196608, 1, -327611, 65536, 1, -327610, 131072, 1, -327609, 196608, 1, -327608, 65536, 1, -327607, 131072, 1, -327606, 196608, 1, -327605, 65536, 1, -327604, 131072, 1, -327603, 196608, 1, -327602, 65536, 1, -327601, 131072, 1, -327600, 196608, 1, -327599, 65536, 1, -327598, 131072, 1, -327597, 196608, 1, -327596, 65536, 1, -327595, 131072, 1, -327594, 196608, 1, -327593, 65536, 1, -327592, 131072, 1, -327591, 196608, 1, -327590, 65536, 1, -327589, 131072, 1, -327588, 196608, 1, -393189, 327680, 1, -393188, 458752, 1)
 
 [node name="Danger" type="TileMap" parent="."]
 position = Vector2(0, 360)
-tile_set = SubResource("TileSet_5jckw")
+tile_set = ExtResource("5_j1rkc")
 format = 2
 layer_0/tile_data = PackedInt32Array(-262124, 0, 0, -262125, 0, 0, -262126, 0, 0, -262132, 0, 0, -262131, 0, 0, -262130, 0, 0, -262120, 0, 0, -262119, 0, 0, -262118, 0, 0, -262117, 0, 0, -262116, 0, 0, -262115, 0, 0, -262114, 0, 0, -262113, 0, 0, -262112, 0, 0, -262111, 0, 0, -262110, 0, 0, -262109, 0, 0, -262108, 0, 0, -262107, 0, 0, -262106, 0, 0, -262105, 0, 0, -262104, 0, 0, -262103, 0, 0, -262102, 0, 0, -262101, 0, 0, -262100, 0, 0, -262099, 0, 0, -262098, 0, 0, -262097, 0, 0, -262096, 0, 0, -262095, 0, 0, -262094, 0, 0, -262093, 0, 0, -262092, 0, 0, -262091, 0, 0, -655300, 0, 0, -720830, 0, 0, -851896, 0, 0, -393159, 0, 0, -393158, 0, 0, -393157, 0, 0, -393156, 0, 0, -393155, 0, 0, -393154, 0, 0, -393153, 0, 0, -393152, 0, 0, -393151, 0, 0, -393150, 0, 0, -393149, 0, 0, -393148, 0, 0, -393147, 0, 0, -393146, 0, 0, -393145, 0, 0, -393144, 0, 0, -393143, 0, 0, -393142, 0, 0, -393141, 0, 0, -393140, 0, 0, -393139, 0, 0, -393138, 0, 0, -393137, 0, 0, -393136, 0, 0, -393135, 0, 0, -393134, 0, 0, -393133, 0, 0, -393132, 0, 0, -393131, 0, 0, -393130, 0, 0, -393129, 0, 0, -393128, 0, 0, -393127, 0, 0, -393126, 0, 0, -393125, 0, 0, -393124, 0, 0)
 
@@ -179,13 +82,7 @@ layer_0/tile_data = PackedInt32Array(-65535, 131072, 2, -65536, 131072, 2, 13107
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="GUI" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 64.0
-offset_bottom = 24.0
-
-[node name="HP_UI" parent="CanvasLayer/GUI" instance=ExtResource("8_k2a4y")]
+[node name="HP_UI" parent="CanvasLayer" instance=ExtResource("8_k2a4y")]
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 80.0
@@ -194,4 +91,4 @@ offset_bottom = 40.0
 [node name="CanvasLayer2" parent="." instance=ExtResource("7_pe7kf")]
 visible = false
 
-[connection signal="hp_changed" from="Player" to="CanvasLayer/GUI/HP_UI" method="_on_player_hp_changed"]
+[connection signal="hp_changed" from="Player" to="CanvasLayer/HP_UI" method="_on_player_hp_changed"]
