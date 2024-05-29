@@ -6,7 +6,12 @@ extends CharacterBody2D
 @export var JUMP_VELOCITY: float = -300.0
 @export var max_running_speed: float = 180
 @export var max_air_speed: float = max_running_speed * 0.9
-@export var coyote_time: float = 0.1
+@export var coyote_time: float = 0.05
+
+# Ghost
+@export var ghost_node : PackedScene
+@onready var ghost_timer = $GhostTimer
+
 
 var direction
 var knockback: = Vector2.ZERO
@@ -74,6 +79,7 @@ func _physics_process(delta):
 			can_jump = false
 	
 	if Input.is_action_just_pressed("dash") and can_dash:
+		ghost_timer.start()
 		if (animSprite.flip_h):
 			dash_direction = Vector2(-1,0)
 		else:
@@ -83,6 +89,7 @@ func _physics_process(delta):
 		can_dash = false
 		dashing = true
 		await get_tree().create_timer(0.3).timeout
+		ghost_timer.stop()
 		dashing = false
 
 	# Get the input direction and handle the movement/deceleration.
@@ -147,3 +154,12 @@ func _damage_finished():
 
 func coyoteTimeout():
 	can_jump = false
+
+func add_ghost():
+	var ghost = ghost_node.instantiate()
+	ghost.set_properties(position, animSprite.scale, animSprite.sprite_frames, animSprite.animation, animSprite.frame, animSprite.flip_h)
+	get_tree().current_scene.add_child(ghost)
+
+
+func _on_ghost_timer_timeout():
+	add_ghost()

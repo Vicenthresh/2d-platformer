@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://b28qtdgpgwah2"]
+[gd_scene load_steps=19 format=3 uid="uid://b28qtdgpgwah2"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_ihejy"]
 [ext_resource type="Texture2D" uid="uid://c2el2t3a48x03" path="res://assets/player2-Sheet.png" id="2_8sp6c"]
+[ext_resource type="PackedScene" uid="uid://bq6fn7pvlhc5b" path="res://Player/ghost.tscn" id="2_yc8pk"]
 [ext_resource type="AudioStream" uid="uid://ci7v1myhwxlb4" path="res://assets/sounds/Bleep_01.wav" id="3_j3wwl"]
 [ext_resource type="AudioStream" uid="uid://cfuwoee4wbnvy" path="res://assets/sounds/Bleep_04.wav" id="3_jrfsn"]
 
@@ -9,9 +10,17 @@
 radius = 1.5
 height = 6.5
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4wqu"]
+atlas = ExtResource("2_8sp6c")
+region = Rect2(32, 64, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_f2owg"]
 atlas = ExtResource("2_8sp6c")
 region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqm6p"]
+atlas = ExtResource("2_8sp6c")
+region = Rect2(16, 64, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_whybk"]
 atlas = ExtResource("2_8sp6c")
@@ -49,11 +58,17 @@ region = Rect2(0, 0, 16, 16)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_u4wqu")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_f2owg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqm6p")
 }],
 "loop": false,
 "name": &"damage",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -103,6 +118,7 @@ animations = [{
 [node name="CharacterBody2D" type="CharacterBody2D"]
 scale = Vector2(2, 2)
 script = ExtResource("1_ihejy")
+ghost_node = ExtResource("2_yc8pk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
@@ -117,7 +133,9 @@ shape = SubResource("CapsuleShape2D_cqank")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_qi3pj")
-animation = &"jump"
+animation = &"damage"
+frame = 1
+frame_progress = 1.0
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_jrfsn")
@@ -128,3 +146,8 @@ bus = &"SFX"
 stream = ExtResource("3_j3wwl")
 pitch_scale = 0.5
 bus = &"SFX"
+
+[node name="GhostTimer" type="Timer" parent="."]
+wait_time = 0.08
+
+[connection signal="timeout" from="GhostTimer" to="." method="_on_ghost_timer_timeout"]

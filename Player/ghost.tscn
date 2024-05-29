@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bq6fn7pvlhc5b"]
+
+[ext_resource type="Script" path="res://Ghost.gd" id="2_8skxd"]
+
+[node name="Ghost" type="Node2D"]
+modulate = Color(0.458405, 0.458405, 0.458405, 1)
+show_behind_parent = true
+script = ExtResource("2_8skxd")
+
+[node name="animated" type="AnimatedSprite2D" parent="."]
