@@ -11,7 +11,7 @@ func set_properties(tx_pos, tx_scale, sprite_frames, animation,  frame, flip):
 	animated.sprite_frames = sprite_frames
 	animated.play(animation)
 	animated.frame = frame
-	animated.stop()
+	animated.pause()
 	animated.flip_h = flip
 	#sprite_2d.frame = frame
 

@@ -119,6 +119,7 @@ animations = [{
 scale = Vector2(2, 2)
 script = ExtResource("1_ihejy")
 ghost_node = ExtResource("2_yc8pk")
+metadata/isPlayer = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
@@ -133,9 +134,7 @@ shape = SubResource("CapsuleShape2D_cqank")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_qi3pj")
-animation = &"damage"
-frame = 1
-frame_progress = 1.0
+animation = &"fall"
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_jrfsn")
@@ -148,6 +147,7 @@ pitch_scale = 0.5
 bus = &"SFX"
 
 [node name="GhostTimer" type="Timer" parent="."]
-wait_time = 0.08
+wait_time = 0.05
+autostart = true
 
 [connection signal="timeout" from="GhostTimer" to="." method="_on_ghost_timer_timeout"]
