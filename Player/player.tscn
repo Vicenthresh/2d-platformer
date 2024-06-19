@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://b28qtdgpgwah2"]
+[gd_scene load_steps=20 format=3 uid="uid://b28qtdgpgwah2"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_ihejy"]
 [ext_resource type="Texture2D" uid="uid://c2el2t3a48x03" path="res://assets/player2-Sheet.png" id="2_8sp6c"]
 [ext_resource type="PackedScene" uid="uid://bq6fn7pvlhc5b" path="res://Player/ghost.tscn" id="2_yc8pk"]
 [ext_resource type="AudioStream" uid="uid://ci7v1myhwxlb4" path="res://assets/sounds/Bleep_01.wav" id="3_j3wwl"]
 [ext_resource type="AudioStream" uid="uid://cfuwoee4wbnvy" path="res://assets/sounds/Bleep_04.wav" id="3_jrfsn"]
+[ext_resource type="PackedScene" uid="uid://xicy3gv5mhs1" path="res://Player/dash.tscn" id="3_lxq23"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cqank"]
 radius = 1.5
@@ -119,13 +120,8 @@ animations = [{
 scale = Vector2(2, 2)
 script = ExtResource("1_ihejy")
 ghost_node = ExtResource("2_yc8pk")
+dash_node = ExtResource("3_lxq23")
 metadata/isPlayer = true
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(0, -2)
-texture = ExtResource("2_8sp6c")
-hframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -0.25)
@@ -148,6 +144,9 @@ bus = &"SFX"
 
 [node name="GhostTimer" type="Timer" parent="."]
 wait_time = 0.05
-autostart = true
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+scale = Vector2(0.5, 0.5)
+target_position = Vector2(5, 0)
 
 [connection signal="timeout" from="GhostTimer" to="." method="_on_ghost_timer_timeout"]

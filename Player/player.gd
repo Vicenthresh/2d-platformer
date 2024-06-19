@@ -11,7 +11,10 @@ extends CharacterBody2D
 # Ghost
 @export var ghost_node : PackedScene
 @onready var ghost_timer = $GhostTimer
+@onready var label = $Label
 
+# Dash
+@export var dash_node : PackedScene
 
 var direction
 var knockback: = Vector2.ZERO
@@ -21,7 +24,7 @@ var can_jump: bool = true
 var state: = 'normal'
 var max_hp: = 3
 var current_hp = max_hp
-var max_jumps = 1
+var max_jumps = 2
 var jumps_left = max_jumps
 var can_dash: bool = false
 var dashing: bool = false
@@ -33,11 +36,14 @@ signal hp_changed(current_hp)
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var animSprite = $AnimatedSprite2D
+@onready var wall_ray = $RayCast2D
 #@onready var label = $Label
 @onready var collision = $CollisionShape2D
 # Sounds
 @onready var jump_sound = $JumpSound
 @onready var damage_sound = $DamageSound
+
+@export var wall_slide_velocity = 80
 
 func _ready():
 	#Engine.time_scale = 0.5
@@ -48,15 +54,20 @@ func _process(delta):
 		get_tree().reload_current_scene()
 		
 func _physics_process(delta):
+	#delta=delta*0.5
 	var max_speed
 	# Add the gravity
 	if not is_on_floor():
 		if can_jump:
 			get_tree().create_timer(coyote_time).timeout.connect(coyoteTimeout)
 		if velocity.y > 0:
-			velocity.y += gravity*1.5 * delta
+			if wall_collider():
+					velocity.y = wall_slide_velocity
+			else:
+				velocity.y += gravity*1.5 * delta
 		elif !dashing:
 			velocity.y += gravity * delta
+		
 		SPEED = 30.0
 		max_speed = max_air_speed
 	else:
@@ -88,6 +99,7 @@ func _physics_process(delta):
 		velocity = dash_direction.normalized() * 500
 		can_dash = false
 		dashing = true
+		add_dash()
 		await get_tree().create_timer(0.3).timeout
 		ghost_timer.stop()
 		dashing = false
@@ -97,8 +109,10 @@ func _physics_process(delta):
 	direction = Input.get_axis("ui_left", "ui_right")
 	if direction > 0:
 		animSprite.flip_h = false
+		wall_ray.scale.x = 0.5
 		velocity.x = move_toward(velocity.x, max_speed, SPEED)
 	elif direction < 0:
+		wall_ray.scale.x = -0.5		
 		animSprite.flip_h = true
 		velocity.x = move_toward(velocity.x, -max_speed, SPEED)
 	else:
@@ -108,7 +122,7 @@ func _physics_process(delta):
 	
 	if state == 'normal':
 		get_animation(velocity)
-	#label.text = str(velocity)
+	label.text = str(velocity)
 	
 	for idx in range(get_slide_collision_count()):
 		var collision = get_slide_collision(idx)
@@ -160,6 +174,12 @@ func add_ghost():
 	ghost.set_properties(position, animSprite.scale, animSprite.sprite_frames, animSprite.animation, animSprite.frame, animSprite.flip_h)
 	get_tree().current_scene.add_child(ghost)
 
-
 func _on_ghost_timer_timeout():
 	add_ghost()
+	
+func add_dash():
+	var dash = dash_node.instantiate()
+	get_tree().current_scene.add_child(dash)
+	
+func wall_collider():
+	return wall_ray.is_colliding()

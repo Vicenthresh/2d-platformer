@@ -1,8 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://imd34hqm1vls"]
+[gd_scene load_steps=13 format=3 uid="uid://imd34hqm1vls"]
 
 [ext_resource type="Script" path="res://hp_ui.gd" id="1_5xtq0"]
-[ext_resource type="Texture2D" uid="uid://cr77iwvxqvg05" path="res://assets/bar_hp.png" id="2_ior4d"]
-[ext_resource type="Texture2D" uid="uid://dq1xyvtogmogq" path="res://assets/hp.png" id="3_3xg6l"]
 [ext_resource type="Texture2D" uid="uid://iu7a2ypsvtp1" path="res://assets/game_assets.png" id="4_l7265"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iwxf0"]
@@ -93,23 +91,6 @@ offset_right = 59.0
 offset_bottom = 24.0
 script = ExtResource("1_5xtq0")
 metadata/_edit_vertical_guides_ = []
-
-[node name="hpBorder" type="TextureRect" parent="."]
-visible = false
-layout_mode = 0
-offset_right = 23.0
-offset_bottom = 6.0
-texture = ExtResource("2_ior4d")
-
-[node name="hpBar" type="TextureRect" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 2.0
-offset_top = 1.0
-offset_right = 21.0
-offset_bottom = 5.0
-texture = ExtResource("3_3xg6l")
-stretch_mode = 1
 
 [node name="heart_1" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

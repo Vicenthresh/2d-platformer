@@ -13,6 +13,7 @@ func set_properties(tx_pos, tx_scale, sprite_frames, animation,  frame, flip):
 	animated.frame = frame
 	animated.pause()
 	animated.flip_h = flip
+	animated.modulate = Color(0, 75, 62)
 	#sprite_2d.frame = frame
 
 func ghosting():

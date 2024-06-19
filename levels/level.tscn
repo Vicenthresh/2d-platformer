@@ -43,14 +43,6 @@ offset_right = 25.0
 offset_bottom = 8.0
 text = "(0.0)"
 
-[node name="Label2" type="Label" parent="Player"]
-visible = false
-offset_left = -10.75
-offset_top = -64.0
-offset_right = 29.25
-offset_bottom = -41.0
-script = ExtResource("7_aages")
-
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(3, 3)
 limit_left = 0
@@ -60,6 +52,14 @@ limit_smoothed = true
 position_smoothing_speed = 2.0
 editor_draw_limits = true
 editor_draw_drag_margin = true
+
+[node name="Label2" type="Label" parent="Player/Camera2D"]
+visible = false
+offset_left = -10.75
+offset_top = -64.0
+offset_right = 29.25
+offset_bottom = -41.0
+script = ExtResource("7_aages")
 
 [node name="TileMap_collision2" type="TileMap" parent="."]
 position = Vector2(0, 360)
