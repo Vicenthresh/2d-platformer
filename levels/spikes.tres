@@ -5,21 +5,13 @@
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k5cus"]
 texture = ExtResource("1_56l7i")
 0:0/0 = 0
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -8, 0, -8, 8, 8, -8, 8)
 1:0/0 = 0
-1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:0/0/physics_layer_0/angular_velocity = 0.0
 2:0/0 = 0
-2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:0/0/physics_layer_0/angular_velocity = 0.0
 3:0/0 = 0
-3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-3:0/0/physics_layer_0/angular_velocity = 0.0
 
 [resource]
-physics_layer_0/collision_layer = 1
-custom_data_layer_0/name = "Danger"
+physics_layer_0/collision_layer = 2
+custom_data_layer_0/name = ""
 custom_data_layer_0/type = 0
 sources/0 = SubResource("TileSetAtlasSource_k5cus")

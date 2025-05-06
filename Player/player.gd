@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+var DANGER_LAYER_BIT: int = 2
 
 @export var SPEED: float = 25.0
 @export var STOPPING_SPEED: float = 15.0
@@ -13,6 +14,9 @@ extends CharacterBody2D
 @onready var ghost_timer = $GhostTimer
 @onready var label = $Label
 
+# Jump Buffer
+@onready var jump_buffer_timer = $JumpBufferTimer
+var jumpBuffered: bool = false
 # Dash
 @export var dash_node : PackedScene
 
@@ -29,6 +33,7 @@ var jumps_left = max_jumps
 var can_dash: bool = false
 var dashing: bool = false
 var dash_direction = Vector2(1,0)
+var wall_jump_vector = Vector2(250 ,-100)
 
 signal hp_changed(current_hp)
 
@@ -38,7 +43,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var animSprite = $AnimatedSprite2D
 @onready var wall_ray = $RayCast2D
 #@onready var label = $Label
-@onready var collision = $CollisionShape2D
+#@onready var collision = $CollisionShape2D
 # Sounds
 @onready var jump_sound = $JumpSound
 @onready var damage_sound = $DamageSound
@@ -63,6 +68,8 @@ func _physics_process(delta):
 		if velocity.y > 0:
 			if wall_collider():
 					velocity.y = wall_slide_velocity
+					jumps_left = max_jumps
+					can_jump = true
 			else:
 				velocity.y += gravity*1.5 * delta
 		elif !dashing:
@@ -77,17 +84,28 @@ func _physics_process(delta):
 		max_speed = max_running_speed
 
 	# Handle Jump.
-	if (Input.is_action_just_pressed("jump")) and jumps_left > 0 and can_jump:
+	if ((Input.is_action_just_pressed("jump")) and jumps_left > 0 and can_jump) or (can_jump and jumpBuffered):
 #		if abs(velocity.x) == max_running_speed:
 #			velocity.y = JUMP_VELOCITY - (abs(velocity.x) * 0.2)
 #			max_air_speed = 200
 #		else:
+		if wall_collider():
+			if direction < 0:
+				velocity = wall_jump_vector
+			elif direction > 0:
+				velocity =  Vector2(-1, 1)*wall_jump_vector
+				
 		jump_sound.play()
 		velocity.y = JUMP_VELOCITY
 		#velocity.y = JUMP_VELOCITY - (abs(velocity.x) * 0.2)		
 		jumps_left -= 1
 		if(jumps_left == 0):
 			can_jump = false
+	elif (Input.is_action_just_pressed("jump") and !can_jump):
+		if !jumpBuffered: 
+			jumpBuffered = true
+			jump_buffer_timer.start()
+		
 	
 	if Input.is_action_just_pressed("dash") and can_dash:
 		ghost_timer.start()
@@ -104,8 +122,6 @@ func _physics_process(delta):
 		ghost_timer.stop()
 		dashing = false
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	direction = Input.get_axis("ui_left", "ui_right")
 	if direction > 0:
 		animSprite.flip_h = false
@@ -118,23 +134,34 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, STOPPING_SPEED)
 		
-	move_and_slide()
+	var collision = move_and_slide()
 	
 	if state == 'normal':
 		get_animation(velocity)
 	label.text = str(velocity)
 	
-	for idx in range(get_slide_collision_count()):
-		var collision = get_slide_collision(idx)
-		if collision.get_collider().name == 'Danger' and state != 'hurt':
-			take_damage(1, Vector2(400 ,-250))
+#	# Old approach
+	#for idx in range(get_slide_collision_count()):
+		#var collision = get_slide_collision(idx)
+		#if collision.get_collider().name == 'Danger2' and state != 'hurt':
+			#take_damage(1, Vector2(400 ,-250))
+			
+	if collision:
+		var collider = get_last_slide_collision().get_collider()
+
+		if collider is TileMapLayer:
+			var tile_rid = get_last_slide_collision().get_collider_rid()
+			var layer_of_collision = PhysicsServer2D.body_get_collision_layer(tile_rid)
+			if layer_of_collision == DANGER_LAYER_BIT:
+				take_damage(1, Vector2(400 ,-250))
+			
 		
-func get_animation(velocity):
-	if velocity.y > 0:
+func get_animation(vel):
+	if vel.y > 0:
 		animSprite.play('fall')
-	elif velocity.y < 0 or not is_on_floor():
+	elif vel.y < 0 or not is_on_floor():
 		animSprite.play('jump')
-	elif velocity.x != 0:
+	elif vel.x != 0:
 		animSprite.play('run')
 	else:
 		animSprite.play('idle')
@@ -143,9 +170,13 @@ func take_damage(damage, knockback_vector:Vector2 = Vector2.ZERO, timer: float =
 	damage_sound.play()
 	current_hp -= damage
 	hp_changed.emit(current_hp)
+	state = 'hurt'
+	animSprite.play('damage')
+	
+	print(current_hp)
 	if(knockback_vector != Vector2.ZERO):
+		print(knockback_vector)
 		knockback = knockback_vector
-		state = 'hurt'
 		if direction < 0:
 			velocity = knockback_vector
 		elif direction > 0:
@@ -153,16 +184,17 @@ func take_damage(damage, knockback_vector:Vector2 = Vector2.ZERO, timer: float =
 		else:
 			velocity = Vector2(0 ,-knockback_vector.x)
 		animSprite.modulate = Color.RED
-		animSprite.play('damage')
 		knockbackTween = get_tree().create_tween()
 		knockbackTween.tween_property(animSprite, "modulate", Color.WHITE, timer)
 		knockbackTween.tween_callback(_damage_finished)
 		
 func die():
+	print('Died!')
 	get_tree().reload_current_scene()
 
 func _damage_finished():
-	if current_hp == 0:
+	print('damage finished')
+	if current_hp < 0:
 		die()
 	state = 'normal'
 
@@ -182,4 +214,7 @@ func add_dash():
 	get_tree().current_scene.add_child(dash)
 	
 func wall_collider():
-	return wall_ray.is_colliding()
+	return wall_ray.is_colliding() and direction != 0
+
+func _on_jump_buffer_timer_timeout() -> void:
+	jumpBuffered = false

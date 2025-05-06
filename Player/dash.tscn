@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://xicy3gv5mhs1"]
 
-[ext_resource type="Script" path="res://Player/dash.gd" id="1_1pavp"]
+[ext_resource type="Script" uid="uid://c7cdhpio1gsi0" path="res://Player/dash.gd" id="1_1pavp"]
 [ext_resource type="Texture2D" uid="uid://ve56cmjj4rdc" path="res://assets/spritesheets/dash-effect.png" id="1_06v52"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_il5jv"]

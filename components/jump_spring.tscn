@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dw8fennlklo4x"]
 
-[ext_resource type="Script" path="res://components/jump_spring.gd" id="1_78eqs"]
+[ext_resource type="Script" uid="uid://v3w74vanba38" path="res://components/jump_spring.gd" id="1_78eqs"]
 [ext_resource type="Texture2D" uid="uid://cnwwtritfvy2e" path="res://assets/assets-Sheet.png" id="1_gjaax"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aea6u"]

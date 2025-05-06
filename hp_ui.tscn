@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://imd34hqm1vls"]
 
-[ext_resource type="Script" path="res://hp_ui.gd" id="1_5xtq0"]
+[ext_resource type="Script" uid="uid://btcmthvekilqm" path="res://hp_ui.gd" id="1_5xtq0"]
 [ext_resource type="Texture2D" uid="uid://iu7a2ypsvtp1" path="res://assets/game_assets.png" id="4_l7265"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iwxf0"]
@@ -87,8 +87,6 @@ animations = [{
 [node name="HP_UI" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 59.0
-offset_bottom = 24.0
 script = ExtResource("1_5xtq0")
 metadata/_edit_vertical_guides_ = []
 
