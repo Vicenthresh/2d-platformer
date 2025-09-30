@@ -1,49 +1,86 @@
-[gd_scene load_steps=9 format=3 uid="uid://xicy3gv5mhs1"]
+[gd_scene load_steps=10 format=3 uid="uid://xicy3gv5mhs1"]
 
-[ext_resource type="Script" uid="uid://c7cdhpio1gsi0" path="res://Player/dash.gd" id="1_1pavp"]
-[ext_resource type="Texture2D" uid="uid://ve56cmjj4rdc" path="res://assets/spritesheets/dash-effect.png" id="1_06v52"]
+[ext_resource type="Texture2D" uid="uid://ei06qeo32o1i" path="res://assets/spritesheets/dash_impulse.png" id="1_bedmj"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_il5jv"]
-atlas = ExtResource("1_06v52")
-region = Rect2(0, 0, 16, 11)
+[sub_resource type="GDScript" id="GDScript_bedmj"]
+script/source = "extends Node2D
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_m445q"]
-atlas = ExtResource("1_06v52")
-region = Rect2(16, 0, 16, 11)
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D # Adjust \"AnimatedSprite2D\" if your node has a different name
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ph3vm"]
-atlas = ExtResource("1_06v52")
-region = Rect2(32, 0, 16, 11)
+func play_dash_animation() -> void:
+	if animated_sprite:
+		animated_sprite.play(\"dash\")
+	else:
+		print_debug(\"Dash script: AnimatedSprite2D node not found or not assigned.\")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_skl31"]
-atlas = ExtResource("1_06v52")
-region = Rect2(48, 0, 16, 11)
+func set_orientation(is_flipped: bool) -> void:
+	if animated_sprite:
+		animated_sprite.flip_h = is_flipped
+		if is_flipped:
+			self.position = Vector2(7, -0.5)
+		else:
+			self.position = Vector2(-7, -0.5)
+	else:
+		print_debug(\"Dash script: AnimatedSprite2D node not found or not assigned.\")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dt4k4"]
-atlas = ExtResource("1_06v52")
-region = Rect2(64, 0, 16, 11)
+func show_effect() -> void:
+	self.visible = true
+	play_dash_animation()
+
+func hide_effect() -> void:
+	self.visible = false
+	if animated_sprite:
+		animated_sprite.stop()
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ucwm4"]
+atlas = ExtResource("1_bedmj")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lt0iu"]
+atlas = ExtResource("1_bedmj")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cjdsg"]
+atlas = ExtResource("1_bedmj")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g4y5l"]
+atlas = ExtResource("1_bedmj")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqug4"]
+atlas = ExtResource("1_bedmj")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70c1o"]
+atlas = ExtResource("1_bedmj")
+region = Rect2(288, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_53s3t"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_il5jv")
+"texture": SubResource("AtlasTexture_ucwm4")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_m445q")
+"texture": SubResource("AtlasTexture_lt0iu")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ph3vm")
+"texture": SubResource("AtlasTexture_cjdsg")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_skl31")
+"texture": SubResource("AtlasTexture_g4y5l")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dt4k4")
+"texture": SubResource("AtlasTexture_tqug4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70c1o")
 }],
 "loop": false,
 "name": &"dash",
-"speed": 15.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -55,8 +92,9 @@ animations = [{
 }]
 
 [node name="Dash" type="Node2D"]
-script = ExtResource("1_1pavp")
+script = SubResource("GDScript_bedmj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_53s3t")
 animation = &"dash"
+frame = 5

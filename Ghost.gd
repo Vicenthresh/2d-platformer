@@ -4,7 +4,7 @@ extends Node2D
 func _ready():
 	ghosting()
 	
-func set_properties(tx_pos, tx_scale, sprite_frames, animation,  frame, flip):
+func set_properties(tx_pos, tx_scale, sprite_frames, animation, frame, flip):
 	animated = get_node("animated")
 	position = tx_pos + Vector2(0, -4)
 	scale = tx_scale * 2
