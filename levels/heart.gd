@@ -57,9 +57,10 @@ func _on_animation_player_animation_finished() -> void:
 		sprite_2d.play("test")
 
 func _physics_process(delta: float) -> void:
-	# Only start following if collected, _can_follow is true, and targets are valid
 	if _is_collected and _can_follow and is_instance_valid(_node_to_follow) and is_instance_valid(_player_orientation_ref) and smoothing_distance > 0:
-		var offset_x_direction = 1.0 if not _player_orientation_ref.animSprite.flip_h else -1.0
+		# Assume the player has a Sprite2D child that is flipped
+		var player_sprite: Sprite2D = _player_orientation_ref.get_node("Sprite2D")
+		var offset_x_direction = 1.0 if not player_sprite.flip_h else -1.0
 		var offset = Vector2(offset_x_direction * 16.0, 0)
 		
 		var desired_position = _node_to_follow.global_position + offset

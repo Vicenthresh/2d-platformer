@@ -122,10 +122,10 @@ position = Vector2(960, 104)
 smoothing_distance = 8
 
 [node name="Dash" parent="." instance=ExtResource("2_ukwr8")]
+visible = false
 
 [node name="AnimatedSprite2D" parent="Dash" index="0"]
 position = Vector2(209, 148)
-animation = &"none"
 frame = 0
 
 [connection signal="hp_changed" from="Player" to="Camera2D/HP_UI" method="_on_player_hp_changed"]

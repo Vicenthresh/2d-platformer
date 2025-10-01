@@ -10,11 +10,12 @@ func play_dash_animation() -> void:
 
 func set_orientation(is_flipped: bool) -> void:
 	if animated_sprite:
-		animated_sprite.flip_h = is_flipped
+		animated_sprite.flip_h = !is_flipped
 		if is_flipped:
-			self.position = Vector2(7, -0.5)
-		else:
 			self.position = Vector2(-7, -0.5)
+		else:
+			self.position = Vector2(7, -0.5)
+			
 	else:
 		print_debug("Dash script: AnimatedSprite2D node not found or not assigned.")
 
