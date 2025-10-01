@@ -66,5 +66,4 @@ script = ExtResource("1_ucwm4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_53s3t")
-animation = &"dash"
-frame = 5
+animation = &"none"

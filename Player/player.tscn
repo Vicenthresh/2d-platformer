@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://b28qtdgpgwah2"]
+[gd_scene load_steps=78 format=3 uid="uid://b28qtdgpgwah2"]
 
 [ext_resource type="Script" uid="uid://if3xtcqk05xe" path="res://Player/player.gd" id="1_ihejy"]
 [ext_resource type="PackedScene" uid="uid://bq6fn7pvlhc5b" path="res://Player/ghost.tscn" id="2_yc8pk"]
@@ -285,6 +285,10 @@ switch_mode = 2
 advance_mode = 2
 advance_condition = &"is_not_turning"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o28un"]
+advance_mode = 2
+advance_condition = &"is_falling"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_jp1hh"]
 states/End/position = Vector2(1053, 110)
 states/Start/position = Vector2(183, 16)
@@ -303,11 +307,11 @@ states/land/position = Vector2(-77, 344)
 states/run/node = SubResource("AnimationNodeBlendTree_hshwv")
 states/run/position = Vector2(567, -45)
 "states/run 2/node" = SubResource("AnimationNodeAnimation_fhl08")
-"states/run 2/position" = Vector2(362, 191)
+"states/run 2/position" = Vector2(652, 60)
 states/turn/node = SubResource("AnimationNodeAnimation_x3vf3")
 states/turn/position = Vector2(505, 299)
-transitions = ["Start", "idle 2", SubResource("AnimationNodeStateMachineTransition_vtle1"), "idle 2", "run 2", SubResource("AnimationNodeStateMachineTransition_od3ui"), "run 2", "idle 2", SubResource("AnimationNodeStateMachineTransition_00tjw"), "idle 2", "jump", SubResource("AnimationNodeStateMachineTransition_k53q1"), "idle 2", "fall", SubResource("AnimationNodeStateMachineTransition_fhl08"), "jump", "fall", SubResource("AnimationNodeStateMachineTransition_x3vf3"), "fall", "land", SubResource("AnimationNodeStateMachineTransition_apopc"), "land", "idle 2", SubResource("AnimationNodeStateMachineTransition_5htga"), "run 2", "jump", SubResource("AnimationNodeStateMachineTransition_p5o4e"), "land", "run 2", SubResource("AnimationNodeStateMachineTransition_gu6f8"), "land", "jump", SubResource("AnimationNodeStateMachineTransition_dkpta"), "fall", "jump", SubResource("AnimationNodeStateMachineTransition_lfmf2"), "run 2", "turn", SubResource("AnimationNodeStateMachineTransition_pisgm"), "turn", "run 2", SubResource("AnimationNodeStateMachineTransition_b1ygp")]
-graph_offset = Vector2(-367, 98)
+transitions = ["Start", "idle 2", SubResource("AnimationNodeStateMachineTransition_vtle1"), "idle 2", "run 2", SubResource("AnimationNodeStateMachineTransition_od3ui"), "run 2", "idle 2", SubResource("AnimationNodeStateMachineTransition_00tjw"), "idle 2", "jump", SubResource("AnimationNodeStateMachineTransition_k53q1"), "idle 2", "fall", SubResource("AnimationNodeStateMachineTransition_fhl08"), "jump", "fall", SubResource("AnimationNodeStateMachineTransition_x3vf3"), "fall", "land", SubResource("AnimationNodeStateMachineTransition_apopc"), "land", "idle 2", SubResource("AnimationNodeStateMachineTransition_5htga"), "run 2", "jump", SubResource("AnimationNodeStateMachineTransition_p5o4e"), "land", "run 2", SubResource("AnimationNodeStateMachineTransition_gu6f8"), "land", "jump", SubResource("AnimationNodeStateMachineTransition_dkpta"), "fall", "jump", SubResource("AnimationNodeStateMachineTransition_lfmf2"), "run 2", "turn", SubResource("AnimationNodeStateMachineTransition_pisgm"), "turn", "run 2", SubResource("AnimationNodeStateMachineTransition_b1ygp"), "run 2", "fall", SubResource("AnimationNodeStateMachineTransition_o28un")]
+graph_offset = Vector2(-281, -132)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_apopc"]
 atlas = ExtResource("8_od3ui")
