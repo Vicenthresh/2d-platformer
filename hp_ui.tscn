@@ -97,11 +97,13 @@ sprite_frames = SubResource("SpriteFrames_tyhy8")
 animation = &"full"
 
 [node name="heart_2" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(30, 12)
 sprite_frames = SubResource("SpriteFrames_tyhy8")
 animation = &"full"
 
 [node name="heart_3" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(48, 12)
 sprite_frames = SubResource("SpriteFrames_tyhy8")
 animation = &"full"
