@@ -72,8 +72,10 @@ layer = -10
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer2"]
 z_index = -10
-offset_right = 640.0
-offset_bottom = 360.0
+offset_left = 1.0
+offset_top = 5.0
+offset_right = 641.0
+offset_bottom = 365.0
 color = Color(0.0588235, 0.105882, 0.14902, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

@@ -11,8 +11,8 @@ config_version=5
 [application]
 
 config/name="neon-platform"
-run/main_scene="res://levels/level.tscn"
-config/features=PackedStringArray("4.4", "GL Compatibility")
+run/main_scene="uid://cprdoga4uk04u"
+config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]

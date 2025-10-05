@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dxi5ku8xetfk4"]
+[gd_scene load_steps=29 format=3 uid="uid://dxi5ku8xetfk4"]
 
 [ext_resource type="Script" uid="uid://dxlpu1tt806sg" path="res://Enemies/EnemyBlob/enemy_blob.gd" id="1_j1o4x"]
 [ext_resource type="Texture2D" uid="uid://kc4f3y1jqg7e" path="res://assets/spritesheets/blob_spritesheet.png" id="1_u8lhb"]
@@ -15,19 +15,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [15]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:offset")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_u8lhb"]
@@ -45,6 +33,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_g80bl"]
+resource_name = "is_jumping"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [10, 11, 12, 13, 14, 15]
 }
 
 [sub_resource type="Animation" id="Animation_rls5f"]
@@ -75,10 +79,45 @@ tracks/1/keys = {
 "values": [Vector2(0, 0), Vector2(0, -40), Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_tt7dt"]
+resource_name = "is_falling"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [16, 17]
+}
+
+[sub_resource type="Animation" id="Animation_jj076"]
+resource_name = "is_landing"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.2010468),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [17, 18, 10]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rls5f"]
 _data = {
 &"RESET": SubResource("Animation_j1o4x"),
 &"idle": SubResource("Animation_u8lhb"),
+&"is_falling": SubResource("Animation_tt7dt"),
+&"is_jumping": SubResource("Animation_g80bl"),
+&"is_landing": SubResource("Animation_jj076"),
 &"jump": SubResource("Animation_rls5f")
 }
 
@@ -88,49 +127,89 @@ animation = &"idle"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_rls5f"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_g80bl"]
+nodes/output/position = Vector2(880, 140)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_j1o4x")
 nodes/Animation/position = Vector2(400, 100)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_rls5f")
 nodes/TimeScale/position = Vector2(640, 40)
-nodes/output/position = Vector2(880, 140)
-node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tt7dt"]
-animation = &"jump"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jj076"]
+animation = &"is_falling"
 
-[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_jj076"]
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_tvqvk"]
 
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_tvqvk"]
-nodes/Animation/node = SubResource("AnimationNodeAnimation_tt7dt")
-nodes/Animation/position = Vector2(448, 148)
-nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_jj076")
-nodes/TimeScale/position = Vector2(651, 121)
-nodes/output/position = Vector2(940, 100)
-node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_lx576"]
+graph_offset = Vector2(-599, 7)
+nodes/output/position = Vector2(380, 160)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_jj076")
+nodes/Animation/position = Vector2(-140, 140)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_tvqvk")
+nodes/TimeScale/position = Vector2(120, 120)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gubwo"]
+animation = &"is_jumping"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_54max"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ew86q"]
+graph_offset = Vector2(-865, 52)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_gubwo")
+nodes/Animation/position = Vector2(-180, 140)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_54max")
+nodes/TimeScale/position = Vector2(60, 100)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tvqvk"]
+animation = &"is_landing"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_lx576"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_gubwo"]
+graph_offset = Vector2(-63, 39)
+nodes/output/position = Vector2(920, 140)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_tvqvk")
+nodes/Animation/position = Vector2(587, 171)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_lx576")
+nodes/TimeScale/position = Vector2(740, 140)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lx576"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j1o4x"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_raf18"]
 advance_mode = 2
 advance_condition = &"is_jumping"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g82ij"]
+advance_mode = 2
+advance_condition = &"is_falling"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j1o4x"]
+advance_mode = 2
+advance_condition = &"is_landing"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rls5f"]
 switch_mode = 2
 advance_mode = 2
-advance_condition = &"not_jumping"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_pb8y7"]
+states/Start/position = Vector2(188, 91)
 "states/idle 2/node" = SubResource("AnimationNodeBlendTree_g80bl")
-"states/idle 2/position" = Vector2(428, 76)
-states/jump/node = SubResource("AnimationNodeBlendTree_tvqvk")
-states/jump/position = Vector2(661, 76)
-transitions = ["Start", "idle 2", SubResource("AnimationNodeStateMachineTransition_lx576"), "idle 2", "jump", SubResource("AnimationNodeStateMachineTransition_j1o4x"), "jump", "idle 2", SubResource("AnimationNodeStateMachineTransition_rls5f")]
-graph_offset = Vector2(-235, -41)
+"states/idle 2/position" = Vector2(331, 91)
+states/is_falling/node = SubResource("AnimationNodeBlendTree_lx576")
+states/is_falling/position = Vector2(597, 194)
+states/is_jumping/node = SubResource("AnimationNodeBlendTree_ew86q")
+states/is_jumping/position = Vector2(597, 91)
+states/is_landing/node = SubResource("AnimationNodeBlendTree_gubwo")
+states/is_landing/position = Vector2(331, 194)
+transitions = ["Start", "idle 2", SubResource("AnimationNodeStateMachineTransition_lx576"), "idle 2", "is_jumping", SubResource("AnimationNodeStateMachineTransition_raf18"), "is_jumping", "is_falling", SubResource("AnimationNodeStateMachineTransition_g82ij"), "is_falling", "is_landing", SubResource("AnimationNodeStateMachineTransition_j1o4x"), "is_landing", "idle 2", SubResource("AnimationNodeStateMachineTransition_rls5f")]
+graph_offset = Vector2(-393, 23)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u8lhb"]
-radius = 6.0
-height = 14.0
+radius = 4.0
+height = 12.0
 
 [node name="EnemyBlob" type="CharacterBody2D"]
 script = ExtResource("1_j1o4x")
@@ -139,23 +218,33 @@ script = ExtResource("1_j1o4x")
 libraries = {
 &"": SubResource("AnimationLibrary_rls5f")
 }
-speed_scale = 0.2
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_pb8y7")
 anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/is_falling = false
+parameters/conditions/is_idle = false
 parameters/conditions/is_jumping = false
-parameters/conditions/not_jumping = false
-"parameters/idle 2/TimeScale/scale" = 1.0
-parameters/jump/TimeScale/scale = 0.3
+parameters/conditions/is_landing = false
+"parameters/idle 2/TimeScale/scale" = 0.02825340112268926
+parameters/is_falling/TimeScale/scale = 1.0
+parameters/is_jumping/TimeScale/scale = 1.0
+parameters/is_landing/TimeScale/scale = 1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_u8lhb")
 hframes = 10
 vframes = 2
-frame = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_u8lhb")
 
 [node name="Area2D" type="Area2D" parent="."]
+
+[node name="JumpTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="JumpTimer" to="." method="_on_jump_timer_timeout"]
