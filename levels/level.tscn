@@ -67,6 +67,39 @@ offset_bottom = -41.0
 text = "test"
 script = ExtResource("7_aages")
 
+[node name="Camera2D2" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+position = Vector2(140, 302)
+limit_left = 0
+limit_bottom = 360
+limit_smoothed = true
+position_smoothing_speed = 24.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_top_margin = 0.05
+drag_right_margin = 0.05
+drag_bottom_margin = 0.5
+editor_draw_limits = true
+editor_draw_drag_margin = true
+script = ExtResource("7_d5x7l")
+player = NodePath("../Player")
+
+[node name="HP_UI" parent="Camera2D2" instance=ExtResource("8_k2a4y")]
+visible = false
+anchors_preset = -1
+offset_left = -28.0
+offset_top = -18.0
+offset_right = -28.0
+offset_bottom = -18.0
+
+[node name="Label2" type="Label" parent="Camera2D2"]
+visible = false
+offset_left = -10.75
+offset_top = -64.0
+offset_right = 29.25
+offset_bottom = -41.0
+text = "test"
+script = ExtResource("7_aages")
+
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 layer = -10
 
@@ -84,6 +117,7 @@ color = Color(0.0588235, 0.105882, 0.14902, 1)
 position = Vector2(169, 304)
 
 [node name="Label" type="Label" parent="Player"]
+visible = false
 offset_left = -17.0
 offset_top = -32.0
 offset_right = 16.0
