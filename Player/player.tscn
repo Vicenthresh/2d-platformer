@@ -191,9 +191,9 @@ animation = &"idle"
 animation = &"idle"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_p5o4e"]
+nodes/output/position = Vector2(840, 180)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_5htga")
 nodes/Animation/position = Vector2(500, 180)
-nodes/output/position = Vector2(840, 180)
 node_connections = [&"output", 0, &"Animation"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pisgm"]
@@ -219,9 +219,9 @@ animation = &"run"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_hshwv"]
 graph_offset = Vector2(-113, 1)
+nodes/output/position = Vector2(840, 80)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_7emwf")
 nodes/Animation/position = Vector2(460, 80)
-nodes/output/position = Vector2(840, 80)
 node_connections = [&"output", 0, &"Animation"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_x3vf3"]
