@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://b28qtdgpgwah2"]
+[gd_scene format=3 uid="uid://b28qtdgpgwah2"]
 
 [ext_resource type="Script" uid="uid://if3xtcqk05xe" path="res://Player/player.gd" id="1_ihejy"]
 [ext_resource type="PackedScene" uid="uid://bq6fn7pvlhc5b" path="res://Player/ghost.tscn" id="2_yc8pk"]
@@ -289,6 +289,10 @@ advance_condition = &"is_not_turning"
 advance_mode = 2
 advance_condition = &"is_falling"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n471f"]
+advance_mode = 2
+advance_condition = &"is_idle"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_jp1hh"]
 states/End/position = Vector2(1053, 110)
 states/Start/position = Vector2(183, 16)
@@ -310,8 +314,8 @@ states/run/position = Vector2(567, -45)
 "states/run 2/position" = Vector2(652, 60)
 states/turn/node = SubResource("AnimationNodeAnimation_x3vf3")
 states/turn/position = Vector2(505, 299)
-transitions = ["Start", "idle 2", SubResource("AnimationNodeStateMachineTransition_vtle1"), "idle 2", "run 2", SubResource("AnimationNodeStateMachineTransition_od3ui"), "run 2", "idle 2", SubResource("AnimationNodeStateMachineTransition_00tjw"), "idle 2", "jump", SubResource("AnimationNodeStateMachineTransition_k53q1"), "idle 2", "fall", SubResource("AnimationNodeStateMachineTransition_fhl08"), "jump", "fall", SubResource("AnimationNodeStateMachineTransition_x3vf3"), "fall", "land", SubResource("AnimationNodeStateMachineTransition_apopc"), "land", "idle 2", SubResource("AnimationNodeStateMachineTransition_5htga"), "run 2", "jump", SubResource("AnimationNodeStateMachineTransition_p5o4e"), "land", "run 2", SubResource("AnimationNodeStateMachineTransition_gu6f8"), "land", "jump", SubResource("AnimationNodeStateMachineTransition_dkpta"), "fall", "jump", SubResource("AnimationNodeStateMachineTransition_lfmf2"), "run 2", "turn", SubResource("AnimationNodeStateMachineTransition_pisgm"), "turn", "run 2", SubResource("AnimationNodeStateMachineTransition_b1ygp"), "run 2", "fall", SubResource("AnimationNodeStateMachineTransition_o28un")]
-graph_offset = Vector2(-281, -132)
+transitions = ["Start", "idle 2", SubResource("AnimationNodeStateMachineTransition_vtle1"), "idle 2", "run 2", SubResource("AnimationNodeStateMachineTransition_od3ui"), "run 2", "idle 2", SubResource("AnimationNodeStateMachineTransition_00tjw"), "idle 2", "jump", SubResource("AnimationNodeStateMachineTransition_k53q1"), "idle 2", "fall", SubResource("AnimationNodeStateMachineTransition_fhl08"), "jump", "fall", SubResource("AnimationNodeStateMachineTransition_x3vf3"), "fall", "land", SubResource("AnimationNodeStateMachineTransition_apopc"), "land", "idle 2", SubResource("AnimationNodeStateMachineTransition_5htga"), "run 2", "jump", SubResource("AnimationNodeStateMachineTransition_p5o4e"), "land", "run 2", SubResource("AnimationNodeStateMachineTransition_gu6f8"), "land", "jump", SubResource("AnimationNodeStateMachineTransition_dkpta"), "fall", "jump", SubResource("AnimationNodeStateMachineTransition_lfmf2"), "run 2", "turn", SubResource("AnimationNodeStateMachineTransition_pisgm"), "turn", "run 2", SubResource("AnimationNodeStateMachineTransition_b1ygp"), "run 2", "fall", SubResource("AnimationNodeStateMachineTransition_o28un"), "jump", "idle 2", SubResource("AnimationNodeStateMachineTransition_n471f")]
+graph_offset = Vector2(14.099018, -36.379684)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_apopc"]
 atlas = ExtResource("8_od3ui")
@@ -580,14 +584,14 @@ animations = [{
 radius = 3.0
 height = 9.0
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=696194320]
 scale = Vector2(2, 2)
 collision_mask = 3
 script = ExtResource("1_ihejy")
 ghost_node = ExtResource("2_yc8pk")
 metadata/isPlayer = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1450742251]
 position = Vector2(0, -1)
 texture = ExtResource("8_od3ui")
 flip_h = true
@@ -595,14 +599,12 @@ hframes = 15
 vframes = 4
 frame = 30
 
-[node name="Animation" type="Node" parent="."]
+[node name="Animation" type="Node" parent="." unique_id=1152311602]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Animation"]
-libraries = {
-&"": SubResource("AnimationLibrary_apopc")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Animation" unique_id=1080900171]
+libraries/ = SubResource("AnimationLibrary_apopc")
 
-[node name="AnimationTree" type="AnimationTree" parent="Animation"]
+[node name="AnimationTree" type="AnimationTree" parent="Animation" unique_id=1887822021]
 tree_root = SubResource("AnimationNodeStateMachine_jp1hh")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/is_falling = false
@@ -613,33 +615,33 @@ parameters/conditions/is_running = false
 parameters/conditions/is_turning = false
 parameters/conditions/on_floor = false
 
-[node name="AnimatedSprite2D_doggy" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D_doggy" type="AnimatedSprite2D" parent="." unique_id=490967894]
 visible = false
 position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_8mwp6")
 animation = &"damage"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1986422911]
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_cqank")
 
-[node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="." unique_id=463370600]
 stream = ExtResource("3_jrfsn")
 pitch_scale = 0.28
 bus = &"SFX"
 
-[node name="DamageSound" type="AudioStreamPlayer2D" parent="."]
+[node name="DamageSound" type="AudioStreamPlayer2D" parent="." unique_id=1865853753]
 stream = ExtResource("3_j3wwl")
 pitch_scale = 0.5
 bus = &"SFX"
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1650613989]
 target_position = Vector2(-5, 0)
 
-[node name="GhostTimer" type="Timer" parent="."]
+[node name="GhostTimer" type="Timer" parent="." unique_id=1161030679]
 wait_time = 0.05
 
-[node name="JumpBufferTimer" type="Timer" parent="."]
+[node name="JumpBufferTimer" type="Timer" parent="." unique_id=1441454954]
 wait_time = 0.15
 one_shot = true
 

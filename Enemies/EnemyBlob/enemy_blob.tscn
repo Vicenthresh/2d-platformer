@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dxi5ku8xetfk4"]
+[gd_scene format=3 uid="uid://dxi5ku8xetfk4"]
 
 [ext_resource type="Script" uid="uid://dxlpu1tt806sg" path="res://Enemies/EnemyBlob/enemy_blob.gd" id="1_j1o4x"]
 [ext_resource type="Texture2D" uid="uid://kc4f3y1jqg7e" path="res://assets/spritesheets/blob_spritesheet.png" id="1_u8lhb"]
@@ -248,15 +248,14 @@ graph_offset = Vector2(-300.5846, -120)
 radius = 4.0
 height = 12.0
 
-[node name="EnemyBlob" type="CharacterBody2D"]
+[node name="EnemyBlob" type="CharacterBody2D" unique_id=963810043]
+scale = Vector2(2, 2)
 script = ExtResource("1_j1o4x")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_rls5f")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=449979846]
+libraries/ = SubResource("AnimationLibrary_rls5f")
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=67236670]
 tree_root = SubResource("AnimationNodeStateMachine_pb8y7")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/is_falling = false
@@ -269,23 +268,23 @@ parameters/is_jumping/TimeScale/scale = 0.0
 parameters/is_landing/TimeScale/scale = 1.0
 parameters/jump_start/TimeScale/scale = 1.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=614742880]
 texture = ExtResource("1_u8lhb")
 hframes = 10
 vframes = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2113815365]
 position = Vector2(0, 3)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_u8lhb")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=1205991796]
 
-[node name="JumpTimer" type="Timer" parent="."]
+[node name="JumpTimer" type="Timer" parent="." unique_id=1920595209]
 wait_time = 2.0
 one_shot = true
 
-[node name="JumpStartTimer" type="Timer" parent="."]
+[node name="JumpStartTimer" type="Timer" parent="." unique_id=619232639]
 wait_time = 0.5
 
 [connection signal="timeout" from="JumpTimer" to="." method="_on_jump_timer_timeout"]

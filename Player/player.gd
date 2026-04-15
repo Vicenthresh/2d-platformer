@@ -72,7 +72,7 @@ var jumpBuffered: bool = false
 # HEALTH STATE
 # ============================================================
 var state := "normal"
-var max_hp := 1
+var max_hp := 10
 var current_hp: int = max_hp
 var hearts_trail: Array[Node2D] = []
 
